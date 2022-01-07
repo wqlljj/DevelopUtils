@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class ScreenInfoAdapter extends RecyclerView.Adapter<ScreenInfoAdapter.ViewHolder> {
     ArrayList<ScreenBean> screenBeen = new ArrayList<>();
-    private View.OnLongClickListener longClickListener;
+    private OnLongClickListener longClickListener;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -79,12 +79,19 @@ public class ScreenInfoAdapter extends RecyclerView.Adapter<ScreenInfoAdapter.Vi
         return screenBeen;
     }
 
-    public void setLongClickListener(View.OnLongClickListener longClickListener) {
+    public void setLongClickListener(OnLongClickListener longClickListener) {
         this.longClickListener = longClickListener;
     }
 
-    public View.OnLongClickListener getLongClickListener() {
+    public OnLongClickListener getLongClickListener() {
         return longClickListener;
+    }
+
+    public void deleteBean(ScreenBean bean) {
+        Log.i("deleteBean", "deleteBean: "+screenBeen.size());
+        screenBeen.remove(bean);
+        Log.i("deleteBean", "deleteBean: "+screenBeen.size());
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
@@ -107,7 +114,13 @@ public class ScreenInfoAdapter extends RecyclerView.Adapter<ScreenInfoAdapter.Vi
                     break;
                 case R.layout.layout_screeninfo_item:
                     if(longClickListener!=null){
-                        itemView.setOnLongClickListener(longClickListener);
+                        itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                            @Override
+                            public boolean onLongClick(View v) {
+                                longClickListener.onLongClick(screenBeen.indexOf(bean));
+                                return false;
+                            }
+                        });
                     }
                     editInfo_cb = ((CheckBox) itemView.findViewById(R.id.editInfo));
                     editInfo_cb.setOnCheckedChangeListener(this);
@@ -166,5 +179,7 @@ public class ScreenInfoAdapter extends RecyclerView.Adapter<ScreenInfoAdapter.Vi
             }
         }
     }
-
+    interface OnLongClickListener{
+        void onLongClick(int position);
+    }
 }

@@ -29,6 +29,22 @@
             android:background="@color/colorPrimaryDark"
             android:onClick="@{onClick::click}"/>
         <Button
+            android:id="@+id/fit_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="适配效果"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorPrimaryDark"
+            android:onClick="@{onClick::click}"/>
+        <Button
+            android:id="@+id/ui_preview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="UI效果图预览"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorPrimaryDark"
+            android:onClick="@{onClick::click}"/>
+        <Button
             android:id="@+id/statistics"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

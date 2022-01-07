@@ -337,7 +337,7 @@ public class ScreenUtil {
 //                System.out.println(dimen_ys[i]);
 //            }
             for (int i = 0; i < screenBeans.size(); i++) {
-                final String filePath = savePath + "/values-" + screenBeans.get(i).getDpi() + "dpi-" + screenBeans.get(i).getWidth_px() + "x" + screenBeans.get(i).getHeight_px() + "/" + file.getName();
+                final String filePath = savePath + "/values-" + screenBeans.get(i).getDpi() + "dpi-" + screenBeans.get(i).getWidth_dp() + "x" + screenBeans.get(i).getHeight_dp() + "/" + file.getName();
                 EventBus.getDefault().post(new EventBean(DIMENS_LOG, "生成适配文件：" + filePath));
                 final int finalI = i;
                 executorService.execute(new Runnable() {
@@ -487,7 +487,7 @@ public class ScreenUtil {
 //                System.out.println(dimen_xs[i]);
 //            }
             for (int i = 0; i < screenBeans.size(); i++) {
-                final String filePath = savePath + "/values-" + screenBeans.get(i).getDpi() + "dpi-" + screenBeans.get(i).getWidth_px() + "x" + screenBeans.get(i).getHeight_px() + "/" + file.getName();
+                final String filePath = savePath + "/values-" + screenBeans.get(i).getDpi() + "dpi-" + screenBeans.get(i).getWidth_dp() + "x" + screenBeans.get(i).getHeight_dp() + "/" + file.getName();
                 EventBus.getDefault().post(new EventBean(DIMENS_LOG, "生成文件：" + filePath));
                 final int finalI = i;
                 executorService.execute(new Runnable() {

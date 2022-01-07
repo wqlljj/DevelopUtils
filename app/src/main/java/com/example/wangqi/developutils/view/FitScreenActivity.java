@@ -54,7 +54,7 @@ import java.util.List;
 import static com.example.wangqi.developutils.application.Constant.baseDimensPath;
 import static com.example.wangqi.developutils.bean.EventBean.CODE.DIMENS_LOG;
 
-public class FitScreenActivity extends AppCompatActivity implements View.OnLongClickListener, AdapterView.OnItemClickListener, View.OnClickListener {
+public class FitScreenActivity extends AppCompatActivity implements ScreenInfoAdapter.OnLongClickListener, AdapterView.OnItemClickListener, View.OnClickListener {
 
     private ActivityFitScreenBinding viewDataBinding;
     private static final int REQUESTCODE_DIMENS_X = 1000;
@@ -226,17 +226,19 @@ public class FitScreenActivity extends AppCompatActivity implements View.OnLongC
     }
 
     @Override
-    public boolean onLongClick(View v) {
-        int childLayoutPosition = viewDataBinding.screenInfo.getChildLayoutPosition(v);
-        Toast.makeText(this, "长按："+"   "+ childLayoutPosition, Toast.LENGTH_SHORT).show();
-        if(childLayoutPosition==0){
+    public void onLongClick(int position) {
+        if(position==0){
 //            startActivity(new Intent(this,SpecialSetActivity.class));
             if(popupWindow==null) {
                 initPopup();
             }
                 popupWindow.showAtLocation(getWindow().getDecorView(), Gravity.BOTTOM, 0, 0);
+        }else{
+            ScreenBean bean = adapter.getData().get(position);
+            if(bean!=null) {
+                adapter.deleteBean(bean);
+            }
         }
-        return false;
     }
 
     private void initPopup() {
